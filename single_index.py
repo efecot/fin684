@@ -85,32 +85,28 @@ col1, col2 = st.columns([2, 1])
 with col1:
     # Create the plot
     fig, ax = plt.subplots(figsize=(10, 7))
-
+    
     # Scatter plot
     ax.scatter(market_returns * 100, stock_returns * 100, alpha=0.6, s=50, color='darkred')
-
+    
     # Regression line
     x_line = np.array([market_returns.min(), market_returns.max()])
     y_line = alpha_estimate + beta_estimate * x_line
-    ax.plot(x_line * 100, y_line * 100, 'b-', linewidth=2.5, label='Regression Line (SCL)')
-
-    # True line (if different from estimated)
-    y_true = alpha_true + beta_true * x_line
-    ax.plot(x_line * 100, y_true * 100, 'g--', linewidth=2, alpha=0.7, label='True Relationship')
-
+    ax.plot(x_line * 100, y_line * 100, 'b-', linewidth=2.5, label='Security Characteristic Line (SCL)')
+    
     # Add grid
     ax.grid(True, alpha=0.3)
     ax.axhline(y=0, color='k', linestyle='-', linewidth=0.5)
     ax.axvline(x=0, color='k', linestyle='-', linewidth=0.5)
-
+    
     # Labels
     ax.set_xlabel('Monthly Excess Return, Market Index (%)', fontsize=12, fontweight='bold')
     ax.set_ylabel('Monthly Excess Return, Stock (%)', fontsize=12, fontweight='bold')
     ax.set_title('Security Characteristic Line (SCL)', fontsize=14, fontweight='bold')
     ax.legend(fontsize=10)
-
+    
     st.pyplot(fig)
-
+    
     # Show equation
     st.markdown("### 📐 Estimated Regression Equation:")
     st.latex(f"R_{{stock}} = {alpha_estimate*100:.3f}\\% + {beta_estimate:.3f} \\times R_{{market}} + e")
