@@ -142,10 +142,11 @@ try:
         ax.text(sigma_O * 100 + 0.5, E_rO * 100 - 0.3, 'P', fontsize=11, ha='left', va='top',
                 bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.8))
         
-        # Mark optimal complete portfolio C
-        ax.plot(sigma_C * 100, E_rC * 100, 'mo', markersize=12, zorder=10)
-        ax.text(sigma_C * 100 - 0.5, E_rC * 100, 'C', fontsize=11, ha='right', va='center',
-                bbox=dict(boxstyle='round', facecolor='lightcoral', alpha=0.8))
+        # Mark optimal complete portfolio C (only if CAL is shown)
+        if show_CAL:
+            ax.plot(sigma_C * 100, E_rC * 100, 'mo', markersize=12, zorder=10)
+            ax.text(sigma_C * 100 - 0.5, E_rC * 100, 'C', fontsize=11, ha='right', va='center',
+                    bbox=dict(boxstyle='round', facecolor='lightcoral', alpha=0.8))
         
         # Formatting
         ax.set_xlabel('Standard Deviation (%)', fontsize=12, fontweight='bold')
