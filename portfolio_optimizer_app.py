@@ -32,6 +32,12 @@ st.sidebar.subheader("Investor Risk Aversion")
 A = st.sidebar.slider("Risk Aversion Coefficient (A)", min_value=1.0, max_value=10.0, value=5.0, step=0.1)
 
 st.sidebar.markdown("---")
+st.sidebar.subheader("Graph Display Options")
+show_opportunity_set = st.sidebar.checkbox("Show Opportunity Set", value=True)
+show_CAL = st.sidebar.checkbox("Show CAL", value=True)
+show_indifference = st.sidebar.checkbox("Show Indifference Curve", value=True)
+
+st.sidebar.markdown("---")
 st.sidebar.info("💡 **Tip**: Adjust the parameters to see how they affect the optimal portfolio.")
 
 # Calculate covariance
@@ -106,14 +112,17 @@ try:
         # Create the plot
         fig, ax = plt.subplots(figsize=(10, 7))
         
-        # Plot opportunity set
-        ax.plot(sigma_portfolio * 100, E_portfolio * 100, 'b-', linewidth=2.5, label='Opportunity Set')
+        # Plot opportunity set (conditional)
+        if show_opportunity_set:
+            ax.plot(sigma_portfolio * 100, E_portfolio * 100, 'b-', linewidth=2.5, label='Opportunity Set')
         
-        # Plot CAL
-        ax.plot(sigma_CAL * 100, E_CAL * 100, 'r-', linewidth=2.5, label='CAL', zorder=5)
+        # Plot CAL (conditional)
+        if show_CAL:
+            ax.plot(sigma_CAL * 100, E_CAL * 100, 'r-', linewidth=2.5, label='CAL', zorder=5)
         
-        # Plot indifference curve
-        ax.plot(sigma_indiff * 100, E_indiff * 100, 'g-', linewidth=2, label='Indifference Curve', alpha=0.7)
+        # Plot indifference curve (conditional)
+        if show_indifference:
+            ax.plot(sigma_indiff * 100, E_indiff * 100, 'g-', linewidth=2, label='Indifference Curve', alpha=0.7)
         
         # Mark individual assets
         ax.plot(sigma_B * 100, E_rB * 100, 'gs', markersize=14, label='Bond (B)', zorder=10)
