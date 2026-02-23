@@ -155,11 +155,13 @@ try:
         ax.grid(True, alpha=0.3, linestyle='--')
         ax.legend(fontsize=9, loc='lower right')
         
-        # Set reasonable axis limits
-        max_sigma = max(sigma_S * 100, sigma_C * 100) * 1.3
-        max_return = max(E_rS * 100, E_rC * 100) * 1.2
+        # Set reasonable axis limits - ensure both assets are visible
+        max_sigma = max(sigma_S * 100, sigma_B * 100, sigma_C * 100, sigma_O * 100) * 1.2
+        max_return = max(E_rS * 100, E_rB * 100, E_rC * 100, E_rO * 100) * 1.15
+        min_return = min(0, E_rB * 100, E_rS * 100) * 0.9 if min(E_rB, E_rS) < 0 else 0
+        
         ax.set_xlim(0, max_sigma)
-        ax.set_ylim(0, max_return)
+        ax.set_ylim(min_return, max_return)
         
         st.pyplot(fig)
     
