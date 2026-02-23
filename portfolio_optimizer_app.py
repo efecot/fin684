@@ -137,10 +137,11 @@ try:
         ax.plot(0, r_f * 100, 'ro', markersize=10, zorder=10)
         ax.text(-0.5, r_f * 100, f'$r_f$', fontsize=11, ha='right', va='center')
         
-        # Mark optimal risky portfolio P
-        ax.plot(sigma_O * 100, E_rO * 100, 'ko', markersize=12, zorder=10)
-        ax.text(sigma_O * 100 + 0.5, E_rO * 100 - 0.3, 'P', fontsize=11, ha='left', va='top',
-                bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.8))
+        # Mark optimal risky portfolio P (only if CAL is shown)
+        if show_CAL:
+            ax.plot(sigma_O * 100, E_rO * 100, 'ko', markersize=12, zorder=10)
+            ax.text(sigma_O * 100 + 0.5, E_rO * 100 - 0.3, 'P', fontsize=11, ha='left', va='top',
+                    bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.8))
         
         # Mark optimal complete portfolio C (only if CAL is shown)
         if show_CAL:
